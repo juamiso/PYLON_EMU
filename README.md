@@ -10,3 +10,6 @@ Modify it at your own needs. I no longer support this since I do not require it 
 Of course it requires a raspberry pi (or a linux machine) plus extra hardware to communicate via CAN.
 
 See a short screen capture video showing the function of it. Currently only the keep alive message is being modified every second (incremented by one). The rest of the values are static (but can be modified in the script to be set on-the-fly) https://www.youtube.com/watch?v=CiFts8KZV6k
+
+Required CANtools package, install it using:
+python3 -m pip install cantools
