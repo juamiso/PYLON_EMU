@@ -1,0 +1,116 @@
+VERSION ""
+
+
+NS_ :
+
+BS_:
+
+BU_: Vector__XXX
+
+BO_ 773 Network_alive_msg: 8 Vector__XXX
+SG_ Alive_packet : 0|64@1- (1,0) [-9.22337203685478E018|9.22337203685478E018] "" Vector__XXX
+
+
+BO_ 862 Battery_Manufacturer: 8 Vector__XXX
+SG_ Manufaturer_string : 0|64@1+ (1,0) [0|1.84467440737096E019] "" Vector__XXX
+
+
+BO_ 860 Battery_Request: 2 Vector__XXX
+SG_ Full_charge_req : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Force_charge_req_II : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Force_charge_req_I : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Discharge_enable : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Charge_enable : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+
+
+BO_ 854 Battery_actual_values_UIt: 6 Vector__XXX
+SG_ Battery_temperature : 32|16@1- (0.1,0) [-50|75] "°C" Vector__XXX
+SG_ Battery_current : 16|16@1- (0.1,0) [-250|250] "A" Vector__XXX
+SG_ Battery_voltage : 0|16@1- (0.01,0) [0|327.67] "V" Vector__XXX
+
+
+BO_ 853 Battery_SoC_SoH: 4 Vector__XXX
+SG_ SoH : 16|16@1+ (1,0) [0|100] "%" Vector__XXX
+SG_ SoC : 0|16@1+ (1,0) [0|100] "%" Vector__XXX
+
+
+BO_ 849 Battery_limits: 8 Vector__XXX
+SG_ Battery_discharge_current_limit : 32|16@1- (0.1,0) [-500|0] "A" Vector__XXX
+SG_ Battery_charge_current_limit : 16|16@1- (0.1,0) [0|500] "A" Vector__XXX
+SG_ Battery_charge_voltage : 0|16@1- (0.1,0) [0|75] "V" Vector__XXX
+SG_ Battery_discharge_voltage : 48|16@1+ (0.1,0) [0|6553.5] "V" Vector__XXX
+
+
+BO_ 857 Battery_Error_Warnings: 7 Vector__XXX
+SG_ Module_numbers : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+SG_ Charge_current_high_WARN : 24|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Internal_Error_WARN : 27|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ voltage_low_WARN : 18|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ voltage_high_WARN : 17|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Temperature_high_WARN : 19|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Temperature_low_WARN : 20|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Discharge_current_high_WARN : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Charge_overcurrent_ERR : 8|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ System_Error : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Overvoltage_ERR : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Undervoltage_ERR : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Overtemperature_ERR : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Undertemperature_ERR : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+SG_ Overcurrent_discharge_ERR : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+
+
+CM_ BO_ 860 "Bit 5 is designed for inverter allows battery to shut down, and able to wake battery up to charge it.Bit 4 is designed for inverter doesn`t want battery to shut down, able to charge battery before shut down to avoid low energy.";
+CM_ SG_ 860 Force_charge_req_II "For US2000B: Please use bit 5, the SOC range is: 15~19%. Bit 4 is NULL.For US2000B-Plus: Bit 5 the SOC range is 5~10%,";
+CM_ SG_ 860 Force_charge_req_I "For US2000B: Please use bit 5, the SOC range is: 15~19%. Bit 4 is NULL.For US2000B-Plus: Bit 5 the SOC range is 5~10%,";
+
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ SG_  "GenSigStartValue" FLOAT -3.4E+038 3.4E+038;
+
+BA_DEF_DEF_  "BusType" "CAN";
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GenSigStartValue" 0;
+
+BA_ "BusType" "CAN";
+
+BA_ "GenMsgCycleTime" BO_ 773 1000;
+BA_ "GenMsgCycleTime" BO_ 862 1000;
+BA_ "GenMsgCycleTime" BO_ 860 1000;
+BA_ "GenMsgCycleTime" BO_ 854 1000;
+BA_ "GenMsgCycleTime" BO_ 853 1000;
+BA_ "GenMsgCycleTime" BO_ 849 1000;
+BA_ "GenMsgCycleTime" BO_ 857 1000;
+
+BA_ "GenSigStartValue" SG_ 773 Alive_packet 0;
+BA_ "GenSigStartValue" SG_ 862 Manufaturer_string 0;
+BA_ "GenSigStartValue" SG_ 860 Full_charge_req 0;
+BA_ "GenSigStartValue" SG_ 860 Force_charge_req_II 0;
+BA_ "GenSigStartValue" SG_ 860 Force_charge_req_I 0;
+BA_ "GenSigStartValue" SG_ 860 Discharge_enable 0;
+BA_ "GenSigStartValue" SG_ 860 Charge_enable 0;
+BA_ "GenSigStartValue" SG_ 854 Battery_temperature 0;
+BA_ "GenSigStartValue" SG_ 854 Battery_current 0;
+BA_ "GenSigStartValue" SG_ 854 Battery_voltage 0;
+BA_ "GenSigStartValue" SG_ 853 SoH 0;
+BA_ "GenSigStartValue" SG_ 853 SoC 0;
+BA_ "GenSigStartValue" SG_ 849 Battery_discharge_current_limit 0;
+BA_ "GenSigStartValue" SG_ 849 Battery_charge_current_limit 0;
+BA_ "GenSigStartValue" SG_ 849 Battery_charge_voltage 0;
+BA_ "GenSigStartValue" SG_ 849 Battery_discharge_voltage 0;
+BA_ "GenSigStartValue" SG_ 857 Module_numbers 0;
+BA_ "GenSigStartValue" SG_ 857 Charge_current_high_WARN 0;
+BA_ "GenSigStartValue" SG_ 857 Internal_Error_WARN 0;
+BA_ "GenSigStartValue" SG_ 857 voltage_low_WARN 0;
+BA_ "GenSigStartValue" SG_ 857 voltage_high_WARN 0;
+BA_ "GenSigStartValue" SG_ 857 Temperature_high_WARN 0;
+BA_ "GenSigStartValue" SG_ 857 Temperature_low_WARN 0;
+BA_ "GenSigStartValue" SG_ 857 Discharge_current_high_WARN 0;
+BA_ "GenSigStartValue" SG_ 857 Charge_overcurrent_ERR 0;
+BA_ "GenSigStartValue" SG_ 857 System_Error 0;
+BA_ "GenSigStartValue" SG_ 857 Overvoltage_ERR 0;
+BA_ "GenSigStartValue" SG_ 857 Undervoltage_ERR 0;
+BA_ "GenSigStartValue" SG_ 857 Overtemperature_ERR 0;
+BA_ "GenSigStartValue" SG_ 857 Undertemperature_ERR 0;
+BA_ "GenSigStartValue" SG_ 857 Overcurrent_discharge_ERR 0;
+
+
